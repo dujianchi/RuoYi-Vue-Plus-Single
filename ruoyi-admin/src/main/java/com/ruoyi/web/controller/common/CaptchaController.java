@@ -17,12 +17,13 @@ import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.config.properties.CaptchaProperties;
 import com.ruoyi.framework.config.properties.MailProperties;
 import com.ruoyi.system.service.ISysConfigService;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.sms4j.api.SmsBlend;
 import org.dromara.sms4j.api.entity.SmsResponse;
+import org.dromara.sms4j.comm.constant.SupplierConstant;
 import org.dromara.sms4j.core.factory.SmsFactory;
-import org.dromara.sms4j.provider.enumerate.SupplierType;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -30,7 +31,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -66,11 +66,11 @@ public class CaptchaController {
         String templateId = "";
         LinkedHashMap<String, String> map = new LinkedHashMap<>(1);
         map.put("code", code);
-        SmsBlend smsBlend = SmsFactory.createSmsBlend(SupplierType.ALIBABA);
+        SmsBlend smsBlend = SmsFactory.getBySupplier(SupplierConstant.ALIBABA);
         SmsResponse smsResponse = smsBlend.sendMessage(phonenumber, templateId, map);
-        if (!"OK".equals(smsResponse.getCode())) {
+        if (!smsResponse.isSuccess()) {
             log.error("验证码短信发送异常 => {}", smsResponse);
-            return R.fail(smsResponse.getMessage());
+            return R.fail(smsResponse.getData() + "");
         }
         return R.ok();
     }

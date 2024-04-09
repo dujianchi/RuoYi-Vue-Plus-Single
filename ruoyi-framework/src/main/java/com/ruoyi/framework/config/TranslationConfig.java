@@ -5,11 +5,11 @@ import com.ruoyi.common.annotation.TranslationType;
 import com.ruoyi.common.translation.TranslationInterface;
 import com.ruoyi.common.translation.handler.TranslationBeanSerializerModifier;
 import com.ruoyi.common.translation.handler.TranslationHandler;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

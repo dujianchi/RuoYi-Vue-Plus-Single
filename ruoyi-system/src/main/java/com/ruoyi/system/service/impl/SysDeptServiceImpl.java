@@ -137,7 +137,7 @@ public class SysDeptServiceImpl implements ISysDeptService, DeptService {
     public String selectDeptNameByIds(String deptIds) {
         List<String> list = new ArrayList<>();
         for (Long id : StringUtils.splitTo(deptIds, Convert::toLong)) {
-            SysDept dept = SpringUtils.getAopProxy(this).selectDeptById(id);
+            SysDept dept = selectDeptById(id);
             if (ObjectUtil.isNotNull(dept)) {
                 list.add(dept.getDeptName());
             }

@@ -86,7 +86,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      */
     @Override
     public boolean selectCaptchaEnabled() {
-        String captchaEnabled = SpringUtils.getAopProxy(this).selectConfigByKey("sys.account.captchaEnabled");
+        String captchaEnabled = selectConfigByKey("sys.account.captchaEnabled");
         if (StringUtils.isEmpty(captchaEnabled)) {
             return true;
         }
@@ -221,7 +221,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      */
     @Override
     public String getConfigValue(String configKey) {
-        return SpringUtils.getAopProxy(this).selectConfigByKey(configKey);
+        return selectConfigByKey(configKey);
     }
 
 }

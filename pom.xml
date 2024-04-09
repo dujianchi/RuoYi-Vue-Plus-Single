@@ -14,36 +14,58 @@
 
     <properties>
         <ruoyi-vue-plus.version>4.8.2</ruoyi-vue-plus.version>
-        <spring-boot.version>2.7.18</spring-boot.version>
+        <spring-boot.version>3.2.3</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <java.version>21</java.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-        <spring-boot.mybatis>2.2.2</spring-boot.mybatis>
-        <springdoc.version>1.6.15</springdoc.version>
-        <poi.version>5.2.3</poi.version>
-        <easyexcel.version>3.3.2</easyexcel.version>
+        <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+        <spring-boot.mybatis>3.0.3</spring-boot.mybatis>
+        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-spring-boot3-starter -->
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webmvc-core -->
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-javadoc -->
+        <springdoc.version>1.8.0</springdoc.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <poi.version>5.2.5</poi.version>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
+        <easyexcel.version>3.3.4</easyexcel.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core -->
         <velocity.version>2.3</velocity.version>
+        <!-- https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot3-starter -->
         <satoken.version>1.37.0</satoken.version>
-        <mybatis-plus.version>3.5.4</mybatis-plus.version>
+        <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
         <p6spy.version>3.9.1</p6spy.version>
-        <hutool.version>5.8.22</hutool.version>
-        <okhttp.version>4.10.0</okhttp.version>
-        <spring-boot-admin.version>2.7.11</spring-boot-admin.version>
-        <redisson.version>3.20.1</redisson.version>
-        <lock4j.version>2.2.3</lock4j.version>
-        <dynamic-ds.version>3.5.2</dynamic-ds.version>
-        <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+        <hutool.version>5.8.27</hutool.version>
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <okhttp.version>4.12.0</okhttp.version>
+        <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-server -->
+        <spring-boot-admin.version>3.2.3</spring-boot-admin.version>
+        <!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
+        <redisson.version>3.27.2</redisson.version>
+        <!-- https://mvnrepository.com/artifact/com.baomidou/lock4j-redisson-spring-boot-starter -->
+        <lock4j.version>2.2.7</lock4j.version>
+        <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot3-starter -->
+        <dynamic-ds.version>4.3.0</dynamic-ds.version>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/transmittable-thread-local -->
+        <alibaba-ttl.version>2.14.5</alibaba-ttl.version>
+        <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
         <xxl-job.version>2.4.0</xxl-job.version>
-        <lombok.version>1.18.30</lombok.version>
-        <bouncycastle.version>1.72</bouncycastle.version>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <lombok.version>1.18.32</lombok.version>
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15to18 -->
+        <bouncycastle.version>1.78</bouncycastle.version>
         <!-- 离线IP地址定位库 -->
+        <!-- https://mvnrepository.com/artifact/org.lionsoul/ip2region -->
         <ip2region.version>2.7.0</ip2region.version>
 
         <!-- OSS 配置 -->
-        <aws-java-sdk-s3.version>1.12.540</aws-java-sdk-s3.version>
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+        <aws-java-sdk-s3.version>1.12.696</aws-java-sdk-s3.version>
         <!-- SMS 配置 -->
-        <sms4j.version>2.2.0</sms4j.version>
+        <!-- https://mvnrepository.com/artifact/org.dromara.sms4j/sms4j-spring-boot-starter -->
+        <sms4j.version>3.2.1</sms4j.version>
     </properties>
 
     <profiles>
@@ -148,7 +170,7 @@
             <!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
             <dependency>
                 <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
                 <version>${satoken.version}</version>
             </dependency>
             <!-- Sa-Token 整合 jwt -->
@@ -167,13 +189,13 @@
             <!-- dynamic-datasource 多数据源-->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
                 <version>${dynamic-ds.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
@@ -341,12 +363,14 @@
     <build>
         <plugins>
             <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <parameters>true</parameters>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <annotationProcessorPaths>
                         <path>
@@ -369,9 +393,10 @@
             </plugin>
             <!-- 单元测试使用 -->
             <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.2.5</version>
                 <configuration>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <!-- 根据打包环境执行对应的@Tag测试方法 -->
@@ -404,8 +429,8 @@
     <repositories>
         <repository>
             <id>public</id>
-            <name>huawei nexus</name>
-            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -415,8 +440,8 @@
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
-            <name>huawei nexus</name>
-            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
