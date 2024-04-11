@@ -11,7 +11,9 @@ import java.util.List;
 public interface ${ClassName}StructMapper {
 
     ${ClassName} fromBo(${ClassName}Bo e);
+
     ${ClassName}Vo toVo(${ClassName} e);
+
     List<${ClassName}Vo> toVoList(List<${ClassName}> e);
 
 }

@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询测试单表列表
+// 查询测试单列表
 export function listDemo(query) {
   return request({
     url: '/demo/demo/list',
@@ -9,16 +9,7 @@ export function listDemo(query) {
   })
 }
 
-// 自定义分页接口
-export function pageDemo(query) {
-  return request({
-    url: '/demo/demo/page',
-    method: 'get',
-    params: query
-  })
-}
-
-// 查询测试单表详细
+// 查询测试单详细
 export function getDemo(id) {
   return request({
     url: '/demo/demo/' + id,
@@ -26,7 +17,7 @@ export function getDemo(id) {
   })
 }
 
-// 新增测试单表
+// 新增测试单
 export function addDemo(data) {
   return request({
     url: '/demo/demo',
@@ -35,7 +26,7 @@ export function addDemo(data) {
   })
 }
 
-// 修改测试单表
+// 修改测试单
 export function updateDemo(data) {
   return request({
     url: '/demo/demo',
@@ -44,11 +35,10 @@ export function updateDemo(data) {
   })
 }
 
-// 删除测试单表
+// 删除测试单
 export function delDemo(id) {
   return request({
     url: '/demo/demo/' + id,
     method: 'delete'
   })
 }
-

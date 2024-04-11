@@ -5,6 +5,7 @@ import ${import};
 #end
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ruoyi.common.annotation.ExcelDictFormat;
 import com.ruoyi.common.convert.ExcelDictConvert;
 import lombok.Data;
@@ -44,6 +45,7 @@ public class ${ClassName}Vo implements Serializable {
 #else
     @ExcelProperty(value = "${comment}")
 #end
+    @JsonProperty(value = "$column.javaField")
     private $column.javaType $column.javaField;
 
 #end

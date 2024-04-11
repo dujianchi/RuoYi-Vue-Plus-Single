@@ -1,5 +1,6 @@
 package ${packageName}.domain.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ruoyi.common.core.validate.AddGroup;
 import com.ruoyi.common.core.validate.EditGroup;
 import lombok.Data;
@@ -52,6 +53,7 @@ public class ${ClassName}Bo extends ${Entity} {
     @NotNull(message = "$column.columnComment不能为空", groups = { $Group })
 #end
 #end
+    @JsonProperty(value = "$column.javaField")
     private $column.javaType $column.javaField;
 
 #end

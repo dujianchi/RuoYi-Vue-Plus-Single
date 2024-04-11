@@ -1,13 +1,13 @@
 package com.ruoyi.demo.domain.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ruoyi.common.core.domain.TreeEntity;
 import com.ruoyi.common.core.validate.AddGroup;
 import com.ruoyi.common.core.validate.EditGroup;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 测试树表业务对象 test_tree
@@ -24,6 +24,7 @@ public class TestTreeBo extends TreeEntity<TestTreeBo> {
      * 主键
      */
     @NotNull(message = "主键不能为空", groups = {EditGroup.class})
+    @JsonProperty(value = "id")
     private Long id;
 
     /**

@@ -11,7 +11,9 @@ import java.util.List;
 public interface TestDemoStructMapper {
 
     TestDemo fromBo(TestDemoBo e);
+
     TestDemoVo toVo(TestDemo e);
+
     List<TestDemoVo> toVoList(List<TestDemo> e);
 
 }
