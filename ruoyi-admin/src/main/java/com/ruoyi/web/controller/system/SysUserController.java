@@ -2,7 +2,6 @@ package com.ruoyi.web.controller.system;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.secure.BCrypt;
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -25,17 +24,19 @@ import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.vo.SysUserExportVo;
 import com.ruoyi.system.domain.vo.SysUserImportVo;
 import com.ruoyi.system.listener.SysUserImportListener;
+import com.ruoyi.system.mapstruct.SystemMapper;
 import com.ruoyi.system.service.ISysDeptService;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,7 @@ import java.util.Map;
  *
  * @author Lion Li
  */
+@Slf4j
 @Validated
 @RequiredArgsConstructor
 @RestController
@@ -56,6 +58,7 @@ public class SysUserController extends BaseController {
     private final ISysRoleService roleService;
     private final ISysPostService postService;
     private final ISysDeptService deptService;
+    private final SystemMapper systemMapper;
 
     /**
      * 获取用户列表
@@ -74,7 +77,7 @@ public class SysUserController extends BaseController {
     @PostMapping("/export")
     public void export(SysUser user, HttpServletResponse response) {
         List<SysUser> list = userService.selectUserList(user);
-        List<SysUserExportVo> listVo = BeanUtil.copyToList(list, SysUserExportVo.class);
+        List<SysUserExportVo> listVo = systemMapper.toSysUserExportVo(list);
         for (int i = 0; i < list.size(); i++) {
             SysDept dept = list.get(i).getDept();
             SysUserExportVo vo = listVo.get(i);

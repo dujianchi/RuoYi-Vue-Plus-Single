@@ -1,6 +1,5 @@
 package com.ruoyi.system.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -14,7 +13,6 @@ import com.ruoyi.common.core.service.OssService;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUtils;
-import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.oss.core.OssClient;
 import com.ruoyi.oss.entity.UploadResult;
 import com.ruoyi.oss.enumd.AccessPolicyType;
@@ -23,14 +21,15 @@ import com.ruoyi.system.domain.SysOss;
 import com.ruoyi.system.domain.bo.SysOssBo;
 import com.ruoyi.system.domain.vo.SysOssVo;
 import com.ruoyi.system.mapper.SysOssMapper;
+import com.ruoyi.system.mapstruct.SystemMapper;
 import com.ruoyi.system.service.ISysOssService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,6 +49,7 @@ import java.util.stream.Collectors;
 public class SysOssServiceImpl implements ISysOssService, OssService {
 
     private final SysOssMapper baseMapper;
+    private final SystemMapper systemMapper;
 
     @Override
     public TableDataInfo<SysOssVo> queryPageList(SysOssBo bo, PageQuery pageQuery) {
@@ -71,7 +71,8 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
                 } catch (Exception ignored) {
                     // 如果oss异常无法连接则将数据直接返回
                     list.add(vo);
-                }            }
+                }
+            }
         }
         return list;
     }
@@ -122,7 +123,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         FileUtils.setAttachmentResponseHeader(response, sysOss.getOriginalName());
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE + "; charset=UTF-8");
         OssClient storage = OssFactory.instance(sysOss.getService());
-        try(InputStream inputStream = storage.getObjectContent(sysOss.getUrl())) {
+        try (InputStream inputStream = storage.getObjectContent(sysOss.getUrl())) {
             int available = inputStream.available();
             IoUtil.copy(inputStream, response.getOutputStream(), available);
             response.setContentLength(available);
@@ -164,7 +165,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         oss.setOriginalName(originalfileName);
         oss.setService(configKey);
         baseMapper.insert(oss);
-        SysOssVo sysOssVo = BeanUtil.toBean(oss, SysOssVo.class);
+        SysOssVo sysOssVo = systemMapper.toSysOssVo(oss);
         return this.matchingUrl(sysOssVo);
     }
 

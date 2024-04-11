@@ -10,13 +10,12 @@ import com.ruoyi.common.annotation.ExcelDictFormat;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.convert.ExcelDictConvert;
 import com.ruoyi.common.core.domain.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 角色表 sys_role

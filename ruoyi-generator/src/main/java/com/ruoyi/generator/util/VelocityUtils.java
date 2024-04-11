@@ -135,6 +135,7 @@ public class VelocityUtils {
         templates.add("vm/java/vo.java.vm");
         templates.add("vm/java/bo.java.vm");
         templates.add("vm/java/mapper.java.vm");
+        templates.add("vm/java/mapstruct.java.vm");
         templates.add("vm/java/service.java.vm");
         templates.add("vm/java/serviceImpl.java.vm");
         templates.add("vm/java/controller.java.vm");
@@ -192,6 +193,8 @@ public class VelocityUtils {
             fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
         } else if (template.contains("mapper.java.vm")) {
             fileName = StringUtils.format("{}/mapper/{}Mapper.java", javaPath, className);
+        }  else if (template.contains("mapstruct.java.vm")) {
+            fileName = StringUtils.format("{}/mapstruct/{}StructMapper.java", javaPath, className);
         } else if (template.contains("service.java.vm")) {
             fileName = StringUtils.format("{}/service/I{}Service.java", javaPath, className);
         } else if (template.contains("serviceImpl.java.vm")) {

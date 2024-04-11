@@ -1,6 +1,5 @@
 package ${packageName}.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.ruoyi.common.utils.StringUtils;
 #if($table.crud || $table.sub)
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -15,6 +14,7 @@ import ${packageName}.domain.bo.${ClassName}Bo;
 import ${packageName}.domain.vo.${ClassName}Vo;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.mapstruct.${ClassName}StructMapper;
 import ${packageName}.service.I${ClassName}Service;
 
 import java.util.List;
@@ -32,6 +32,7 @@ import java.util.Collection;
 public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 
     private final ${ClassName}Mapper baseMapper;
+    private final ${ClassName}StructMapper ${className}StructMapper;
 
     /**
      * 查询${functionName}
@@ -94,7 +95,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
      */
     @Override
     public Boolean insertByBo(${ClassName}Bo bo) {
-        ${ClassName} add = BeanUtil.toBean(bo, ${ClassName}.class);
+        ${ClassName} add = ${className}StructMapper.fromBo(bo);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
 #set($pk=$pkColumn.javaField.substring(0,1).toUpperCase() + ${pkColumn.javaField.substring(1)})
@@ -109,7 +110,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
      */
     @Override
     public Boolean updateByBo(${ClassName}Bo bo) {
-        ${ClassName} update = BeanUtil.toBean(bo, ${ClassName}.class);
+        ${ClassName} update = ${className}StructMapper.fromBo(bo);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;
     }

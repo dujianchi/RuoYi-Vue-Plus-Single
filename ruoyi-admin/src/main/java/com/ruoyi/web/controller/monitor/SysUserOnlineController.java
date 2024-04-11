@@ -3,7 +3,6 @@ package com.ruoyi.web.controller.monitor;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.bean.BeanUtil;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -15,6 +14,7 @@ import com.ruoyi.common.utils.StreamUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.redis.RedisUtils;
 import com.ruoyi.system.domain.SysUserOnline;
+import com.ruoyi.system.mapstruct.SystemMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +31,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/monitor/online")
 public class SysUserOnlineController extends BaseController {
+
+    private final SystemMapper systemMapper;
 
     /**
      * 获取在线用户监控列表
@@ -68,7 +70,7 @@ public class SysUserOnlineController extends BaseController {
         }
         Collections.reverse(userOnlineDTOList);
         userOnlineDTOList.removeAll(Collections.singleton(null));
-        List<SysUserOnline> userOnlineList = BeanUtil.copyToList(userOnlineDTOList, SysUserOnline.class);
+        List<SysUserOnline> userOnlineList = systemMapper.toSysUserOnline(userOnlineDTOList);
         return TableDataInfo.build(userOnlineList);
     }
 

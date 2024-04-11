@@ -7,12 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.common.annotation.ExcelDictFormat;
 import com.ruoyi.common.convert.ExcelDictConvert;
 import com.ruoyi.common.core.domain.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 字典类型表 sys_dict_type

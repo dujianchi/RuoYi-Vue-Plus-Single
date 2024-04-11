@@ -3,7 +3,6 @@ package com.ruoyi.system.service;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ruoyi.common.constant.CacheConstants;
@@ -27,6 +26,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.redis.RedisUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.mapper.SysUserMapper;
+import com.ruoyi.system.mapstruct.SystemMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +49,7 @@ public class SysLoginService {
     private final SysUserMapper userMapper;
     private final ISysConfigService configService;
     private final SysPermissionService permissionService;
+    private final SystemMapper systemMapper;
 
     @Value("${user.password.maxRetryCount}")
     private Integer maxRetryCount;
@@ -282,7 +283,7 @@ public class SysLoginService {
         loginUser.setMenuPermission(permissionService.getMenuPermission(user));
         loginUser.setRolePermission(permissionService.getRolePermission(user));
         loginUser.setDeptName(ObjectUtil.isNull(user.getDept()) ? "" : user.getDept().getDeptName());
-        List<RoleDTO> roles = BeanUtil.copyToList(user.getRoles(), RoleDTO.class);
+        List<RoleDTO> roles = systemMapper.toRoleDTO(user.getRoles());
         loginUser.setRoles(roles);
         return loginUser;
     }

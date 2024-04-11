@@ -1,7 +1,6 @@
 package com.ruoyi.system.listener;
 
 import cn.dev33.satoken.secure.BCrypt;
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
@@ -13,6 +12,7 @@ import com.ruoyi.common.helper.LoginHelper;
 import com.ruoyi.common.utils.ValidatorUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.vo.SysUserImportVo;
+import com.ruoyi.system.mapstruct.SystemMapper;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +34,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
     private final Boolean isUpdateSupport;
 
     private final String operName;
+    private final SystemMapper systemMapper;
 
     private int successNum = 0;
     private int failureNum = 0;
@@ -46,6 +47,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
         this.password = BCrypt.hashpw(initPassword);
         this.isUpdateSupport = isUpdateSupport;
         this.operName = LoginHelper.getUsername();
+        this.systemMapper = SpringUtils.getBean(SystemMapper.class);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
         try {
             // 验证是否存在这个用户
             if (ObjectUtil.isNull(user)) {
-                user = BeanUtil.toBean(userVo, SysUser.class);
+                user = systemMapper.toSysUser(userVo);
                 ValidatorUtils.validate(user);
                 user.setPassword(password);
                 user.setCreateBy(operName);
@@ -63,7 +65,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
                 successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 导入成功");
             } else if (isUpdateSupport) {
                 Long userId = user.getUserId();
-                user = BeanUtil.toBean(userVo, SysUser.class);
+                user = systemMapper.toSysUser(userVo);
                 user.setUserId(userId);
                 ValidatorUtils.validate(user);
                 userService.checkUserAllowed(user);

@@ -1,20 +1,19 @@
 package com.ruoyi.common.core.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ruoyi.common.annotation.Sensitive;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.enums.SensitiveStrategy;
 import com.ruoyi.common.xss.Xss;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -94,13 +93,8 @@ public class SysUser extends BaseEntity {
         updateStrategy = FieldStrategy.NOT_EMPTY,
         whereStrategy = FieldStrategy.NOT_EMPTY
     )
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-
-    @JsonIgnore
-    @JsonProperty
-    public String getPassword() {
-        return password;
-    }
 
     /**
      * 帐号状态（0正常 1停用）

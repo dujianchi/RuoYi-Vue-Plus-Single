@@ -1,6 +1,5 @@
 package com.ruoyi.system.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -20,6 +19,7 @@ import com.ruoyi.system.domain.SysOssConfig;
 import com.ruoyi.system.domain.bo.SysOssConfigBo;
 import com.ruoyi.system.domain.vo.SysOssConfigVo;
 import com.ruoyi.system.mapper.SysOssConfigMapper;
+import com.ruoyi.system.mapstruct.SystemMapper;
 import com.ruoyi.system.service.ISysOssConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +42,7 @@ import java.util.List;
 public class SysOssConfigServiceImpl implements ISysOssConfigService {
 
     private final SysOssConfigMapper baseMapper;
+    private final SystemMapper systemMapper;
 
     /**
      * 项目启动时，初始化参数到缓存，加载配置类
@@ -82,7 +83,7 @@ public class SysOssConfigServiceImpl implements ISysOssConfigService {
 
     @Override
     public Boolean insertByBo(SysOssConfigBo bo) {
-        SysOssConfig config = BeanUtil.toBean(bo, SysOssConfig.class);
+        SysOssConfig config = systemMapper.toSysOssConfig(bo);
         validEntityBeforeSave(config);
         boolean flag = baseMapper.insert(config) > 0;
         if (flag) {
@@ -93,7 +94,7 @@ public class SysOssConfigServiceImpl implements ISysOssConfigService {
 
     @Override
     public Boolean updateByBo(SysOssConfigBo bo) {
-        SysOssConfig config = BeanUtil.toBean(bo, SysOssConfig.class);
+        SysOssConfig config = systemMapper.toSysOssConfig(bo);
         validEntityBeforeSave(config);
         LambdaUpdateWrapper<SysOssConfig> luw = new LambdaUpdateWrapper<>();
         luw.set(ObjectUtil.isNull(config.getPrefix()), SysOssConfig::getPrefix, "");
@@ -157,7 +158,7 @@ public class SysOssConfigServiceImpl implements ISysOssConfigService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateOssConfigStatus(SysOssConfigBo bo) {
-        SysOssConfig sysOssConfig = BeanUtil.toBean(bo, SysOssConfig.class);
+        SysOssConfig sysOssConfig = systemMapper.toSysOssConfig(bo);
         int row = baseMapper.update(null, new LambdaUpdateWrapper<SysOssConfig>()
             .set(SysOssConfig::getStatus, "1"));
         row += baseMapper.updateById(sysOssConfig);

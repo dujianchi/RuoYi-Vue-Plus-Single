@@ -4,18 +4,17 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
+import java.io.Serializable;
 
 /**
- * 测试单表视图对象 test_demo
+ * 测试单视图对象 test_demo
  *
- * @author Lion Li
- * @date 2021-07-26
+ * @author ruoyi
+ * @date 2024-04-09
  */
 @Data
 @ExcelIgnoreUnannotated
-public class TestDemoVo {
+public class TestDemoVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +40,7 @@ public class TestDemoVo {
      * 排序号
      */
     @ExcelProperty(value = "排序号")
-    private Integer orderNum;
+    private Long orderNum;
 
     /**
      * key键
@@ -54,30 +53,6 @@ public class TestDemoVo {
      */
     @ExcelProperty(value = "值")
     private String value;
-
-    /**
-     * 创建时间
-     */
-    @ExcelProperty(value = "创建时间")
-    private Date createTime;
-
-    /**
-     * 创建人
-     */
-    @ExcelProperty(value = "创建人")
-    private String createBy;
-
-    /**
-     * 更新时间
-     */
-    @ExcelProperty(value = "更新时间")
-    private Date updateTime;
-
-    /**
-     * 更新人
-     */
-    @ExcelProperty(value = "更新人")
-    private String updateBy;
 
 
 }

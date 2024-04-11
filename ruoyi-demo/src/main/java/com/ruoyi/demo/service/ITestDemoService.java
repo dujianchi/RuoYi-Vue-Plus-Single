@@ -2,7 +2,6 @@ package com.ruoyi.demo.service;
 
 import com.ruoyi.common.core.domain.PageQuery;
 import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.demo.domain.TestDemo;
 import com.ruoyi.demo.domain.bo.TestDemoBo;
 import com.ruoyi.demo.domain.vo.TestDemoVo;
 
@@ -10,62 +9,40 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 测试单表Service接口
+ * 测试单Service接口
  *
- * @author Lion Li
- * @date 2021-07-26
+ * @author ruoyi
+ * @date 2024-04-09
  */
 public interface ITestDemoService {
 
     /**
-     * 查询单个
-     *
-     * @return
+     * 查询测试单
      */
     TestDemoVo queryById(Long id);
 
     /**
-     * 查询列表
+     * 查询测试单列表
      */
     TableDataInfo<TestDemoVo> queryPageList(TestDemoBo bo, PageQuery pageQuery);
 
     /**
-     * 自定义分页查询
-     */
-    TableDataInfo<TestDemoVo> customPageList(TestDemoBo bo, PageQuery pageQuery);
-
-    /**
-     * 查询列表
+     * 查询测试单列表
      */
     List<TestDemoVo> queryList(TestDemoBo bo);
 
     /**
-     * 根据新增业务对象插入测试单表
-     *
-     * @param bo 测试单表新增业务对象
-     * @return
+     * 新增测试单
      */
     Boolean insertByBo(TestDemoBo bo);
 
     /**
-     * 根据编辑业务对象修改测试单表
-     *
-     * @param bo 测试单表编辑业务对象
-     * @return
+     * 修改测试单
      */
     Boolean updateByBo(TestDemoBo bo);
 
     /**
-     * 校验并删除数据
-     *
-     * @param ids     主键集合
-     * @param isValid 是否校验,true-删除前校验,false-不校验
-     * @return
+     * 校验并批量删除测试单信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
-
-    /**
-     * 批量保存
-     */
-    Boolean saveBatch(List<TestDemo> list);
 }
