@@ -1,3 +1,11 @@
+## 关于本仓库
+由于我手上项目大多用不到多租户，但是RuoYi-Vue-Plus 5.x只有多租户版本可以选（截至2024年4月11日没有发现5.x分支的非多租户版本）。
+又由于4.x分支也停止维护，于是下载了4.x分支的代码，自行升级到spring boot 3.x，并且采用jdk21，采用mapstruct。  
+
+欢迎支持原作者，原仓库地址 [RuoYi-Vue-Plus-github](https://github.com/dromara/RuoYi-Vue-Plus)
+
+- - -
+
 <img src="https://foruda.gitee.com/images/1679673773341074847/178e8451_1766278.png" width="50%" height="50%">
 <div style="height: 10px; clear: both;"></div>
 
